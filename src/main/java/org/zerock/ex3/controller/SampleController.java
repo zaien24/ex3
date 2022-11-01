@@ -26,21 +26,21 @@ public class SampleController {
 
     }
 
-    @GetMapping("/ex2")
-    public void exModel(Model model) {
-
-        List<SampleDTO> list = IntStream.rangeClosed(1,20).asLongStream().mapToObj(i -> {
-            SampleDTO dto = SampleDTO.builder()
-                    .sno(i)
-                    .first("First.."+i)
-                    .last("Last.."+i)
-                    .regTime(LocalDateTime.now())
-                    .build();
-            return dto;
-        }).collect(Collectors.toList());
-
-        model.addAttribute("list", list);
-    }
+//    @GetMapping("/ex2")
+//    public void exModel(Model model) {
+//
+//        List<SampleDTO> list = IntStream.rangeClosed(1,20).asLongStream().mapToObj(i -> {
+//            SampleDTO dto = SampleDTO.builder()
+//                    .sno(i)
+//                    .first("First.."+i)
+//                    .last("Last.."+i)
+//                    .regTime(LocalDateTime.now())
+//                    .build();
+//            return dto;
+//        }).collect(Collectors.toList());
+//
+//        model.addAttribute("list", list);
+//    }
 
     @GetMapping({"/exInline"})
     public String exInline(RedirectAttributes redirectAttributes){
@@ -65,6 +65,22 @@ public class SampleController {
 
         log.info("ex3");
 
+    }
+
+    @GetMapping({"/ex2", "/exLink"})
+    public void exModel(Model model){
+
+        List<SampleDTO> list = IntStream.rangeClosed(1,20).asLongStream().mapToObj(i -> {
+            SampleDTO dto = SampleDTO.builder()
+                    .sno(i)
+                    .first("First.."+i)
+                    .last("Last.."+i)
+                    .regTime(LocalDateTime.now())
+                    .build();
+            return dto;
+        }).collect(Collectors.toList());
+
+        model.addAttribute("list", list);
     }
 
 }
